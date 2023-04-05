@@ -1,0 +1,77 @@
+def sublude(name) {
+  def projectName = ':' + name.substring(1).replace(':', '-')
+  include projectName
+  project(projectName).projectDir = file(name.substring(1).replace(':', '/'))
+}
+
+include ':play-services-basement'
+
+include ':play-services-tasks'
+
+include ':play-services-api'
+
+include ':play-services-appinvite'
+include ':play-services-auth'
+include ':play-services-auth-base'
+include ':play-services-base'
+include ':play-services-cast'
+include ':play-services-cast-framework'
+include ':play-services-clearcut'
+include ':play-services-drive'
+include ':play-services-droidguard'
+include ':play-services-fido'
+include ':play-services-gcm'
+include ':play-services-gmscompliance'
+include ':play-services-iid'
+include ':play-services-location'
+include ':play-services-maps'
+include ':play-services-measurement-base'
+include ':play-services-nearby'
+include ':play-services-oss-licenses'
+include ':play-services-places'
+include ':play-services-places-placereport'
+include ':play-services-recaptcha'
+include ':play-services-safetynet'
+include ':play-services-tapandpay'
+include ':play-services-vision'
+include ':play-services-vision-common'
+include ':play-services-wearable'
+
+include ':play-services'
+
+include ':firebase-auth'
+include ':firebase-dynamic-links-api'
+
+// core only
+
+include ':play-services-core-proto'
+
+sublude ':play-services-basement:ktx'
+sublude ':play-services-tasks:ktx'
+
+sublude ':play-services-base:core'
+sublude ':play-services-cast:core'
+sublude ':play-services-cast-framework:core'
+include ':play-services-chimera-core'
+include ':play-services-conscrypt-provider-core'
+sublude ':play-services-cronet:core'
+sublude ':play-services-droidguard:core'
+sublude ':play-services-fido:core'
+sublude ':play-services-gmscompliance:core'
+sublude ':play-services-location:core'
+sublude ':play-services-location:system-api'
+include ':play-services-maps-core-mapbox'
+include ':play-services-maps-core-vtm'
+include ':play-services-maps-core-vtm:vtm-microg-theme'
+sublude ':play-services-nearby:core'
+sublude ':play-services-oss-licenses:core'
+sublude ':play-services-safetynet:core'
+sublude ':play-services-recaptcha:core'
+sublude ':play-services-tapandpay:core'
+sublude ':play-services-vision:core'
+sublude ':play-services-wearable:core'
+
+sublude ':firebase-auth:core'
+
+include ':play-services-core:microg-ui-tools' // Legacy
+include ':play-services-core'

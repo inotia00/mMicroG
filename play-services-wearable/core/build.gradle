@@ -1,0 +1,51 @@
+/*
+ * SPDX-FileCopyrightText: 2022 microG Project Team
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+dependencies {
+    implementation project(':play-services-base-core')
+
+    implementation project(':play-services-location')
+    implementation project(':play-services-wearable')
+
+    implementation "org.microg:wearable:0.1.1"
+}
+
+android {
+    compileSdkVersion androidCompileSdk
+    buildToolsVersion "$androidBuildVersionTools"
+
+    defaultConfig {
+        versionName version
+        minSdkVersion androidMinSdk
+        targetSdkVersion androidTargetSdk
+    }
+
+    buildFeatures {
+        dataBinding = true
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    lintOptions {
+        disable 'MissingTranslation'
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = 11
+    }
+}

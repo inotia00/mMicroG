@@ -1,0 +1,43 @@
+/*
+ * SPDX-FileCopyrightText: 2020, microG Project Team
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+dependencies {
+    api project(':play-services-location')
+    compileOnly project(':play-services-location-system-api')
+    implementation project(':play-services-base-core')
+
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.20'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
+    implementation 'androidx.lifecycle:lifecycle-service:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
+
+    implementation "com.android.volley:volley:1.2.1"
+
+    implementation 'org.microg:address-formatter:0.3.1'
+}
+
+android {
+    compileSdkVersion androidCompileSdk
+    buildToolsVersion "$androidBuildVersionTools"
+
+    defaultConfig {
+        versionName version
+        minSdkVersion androidMinSdk
+        targetSdkVersion androidTargetSdk
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+}

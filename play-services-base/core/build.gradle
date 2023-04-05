@@ -1,0 +1,53 @@
+/*
+ * SPDX-FileCopyrightText: 2020, microG Project Team
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+dependencies {
+    api project(':play-services-basement-ktx')
+
+    implementation 'androidx.annotation:annotation:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.lifecycle:lifecycle-service:2.6.1'
+    implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
+    implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
+    implementation "androidx.preference:preference-ktx:1.2.0"
+
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.20'
+}
+
+android {
+    compileSdkVersion androidCompileSdk
+    buildToolsVersion "$androidBuildVersionTools"
+
+    defaultConfig {
+        versionName version
+        minSdkVersion androidMinSdk
+        targetSdkVersion androidTargetSdk
+
+        buildConfigField "String", "BASE_PACKAGE_NAME", "\"$basePackageName\""
+    }
+
+    buildFeatures {
+        dataBinding = true
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+
+    lintOptions {
+        disable 'MissingTranslation'
+    }
+}

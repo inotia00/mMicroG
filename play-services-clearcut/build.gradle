@@ -1,0 +1,35 @@
+/*
+ * SPDX-FileCopyrightText: 2022 microG Project Team
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+android {
+    compileSdkVersion androidCompileSdk
+    buildToolsVersion "$androidBuildVersionTools"
+
+    defaultConfig {
+        versionName version
+        minSdkVersion androidMinSdk
+        targetSdkVersion androidTargetSdk
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+}
+
+dependencies {
+    implementation project(':play-services-api')
+
+    // Dependencies from play-services-clearcut:17.0.0
+    api 'androidx.core:core:1.10.0'
+    api project(':play-services-base')
+    api project(':play-services-basement')
+//    api project(':play-services-phenotype')
+    api project(':play-services-tasks')
+}
