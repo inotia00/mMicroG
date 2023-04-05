@@ -1,0 +1,70 @@
+/*
+ * SPDX-FileCopyrightText: 2021 microG Project Team
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+apply plugin: 'com.android.library'
+apply plugin: 'com.squareup.wire'
+apply plugin: 'kotlin-android'
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+dependencies {
+    api project(':play-services-safetynet')
+
+    implementation project(':play-services-base-core')
+    implementation project(':play-services-droidguard')
+    implementation project(':play-services-droidguard-core')
+
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.21'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
+
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.core:core-ktx:1.10.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-service:2.6.1'
+    implementation 'androidx.webkit:webkit:1.6.1'
+
+    implementation "com.android.volley:volley:1.2.1"
+    implementation 'com.squareup.wire:wire-runtime:4.5.5'
+}
+
+wire {
+    kotlin {
+        javaInterop = true
+    }
+}
+
+android {
+    compileSdkVersion androidCompileSdk
+    buildToolsVersion "$androidBuildVersionTools"
+
+    defaultConfig {
+        versionName version
+        minSdkVersion androidMinSdk
+        targetSdkVersion androidTargetSdk
+
+        buildConfigField "String", "BASE_PACKAGE_NAME", "\"$basePackageName\""
+        manifestPlaceholders = [
+                basePackageName: "$basePackageName"
+        ]
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    lintOptions {
+        disable 'MissingTranslation'
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17
+    }
+}
